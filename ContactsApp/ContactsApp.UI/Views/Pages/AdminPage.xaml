@@ -1,0 +1,28 @@
+﻿<Page x:Class="ContactsApp.UI.Views.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:l="clr-namespace:ContactsApp.UI.Views.Pages"
+      xmlns:b="clr-namespace:ContactsApp.UI.Helpers.Behaviors"
+      mc:Ignorable="d" 
+      ShowsNavigationUI="False"
+      WindowHeight="650"
+      d:DesignHeight="650" 
+      WindowWidth="900"
+      d:DesignWidth="900"
+      WindowTitle="Your Contacts"
+      Title="Contacts Page"
+      Background="Black"
+      DataContext="{Binding Path=AdminPageVm, Source={StaticResource Locator}}">
+    <Page.Resources>
+        
+    </Page.Resources>
+    <Grid>
+        <Label Margin="30"
+               Foreground="Firebrick"
+               HorizontalContentAlignment="Center"
+               Content="Contacts Page"/>
+    </Grid>
+</Page>

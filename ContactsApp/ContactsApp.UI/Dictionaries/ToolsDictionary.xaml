@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:loc="clr-namespace:ContactsApp.UI.IoC.Locators"
+                    xmlns:con="clr-namespace:ContactsApp.UI.Helpers.Converters">
+    <loc:ApplicationLocatorWrapper x:Key="Locator"/>
+    <con:StringToDecimalConverter x:Key="StdConverter"/>
+    <con:MultiDefaultConverter x:Key="MultiDefaultConverter"/>
+    <con:SensStringConverter x:Key="StringConverter"/>
+    
+    <BooleanToVisibilityConverter x:Key="StdVisibilityConverter"/>
+</ResourceDictionary>

@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Brushes-->
+    <LinearGradientBrush x:Key="CommonNoteBrush"
+                         x:Shared="False"
+                         EndPoint="0,-0.1" 
+                         StartPoint="0.35,0.9">
+        <GradientStop Color="Black" Offset="1"/>
+        <GradientStop Color="DarkGray" Offset="0.01"/>
+    </LinearGradientBrush>
+    <!--Brushes-->
+    
+    <!--Labels-->
+    <Style x:Key="LabelTitle"
+           x:Shared="False"
+           TargetType="Label">
+        <Style.Setters>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="Firebrick"/>
+            <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style.Setters>
+    </Style>
+    <!--Labels-->
+    
+    <!--Grids-->
+    <Style x:Key="GridMargin5"
+           x:Shared="False"
+           TargetType="Grid">
+        <Style.Setters>
+            <Setter Property="Margin" Value="5"/>
+        </Style.Setters>
+    </Style>
+    <!--Grids-->
+</ResourceDictionary>

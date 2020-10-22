@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="ContactsApp.UI.Views.Controls.ContactControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:ContactsApp.UI.ViewModels"
+             mc:Ignorable="d"
+             BorderBrush="Black"
+             BorderThickness="1.5"
+             Margin="1.5"
+             MinWidth="400">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="OrangeRed" Offset="0.6"/>
+            <GradientStop Color="{Binding}" Offset="0.05"/>
+            <GradientStop Color="Firebrick" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <UserControl.Resources>
+        <!--Borders-->
+        <Style x:Key="CcBorderStyle"
+               x:Shared="False"
+               TargetType="Border">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="CornerRadius" Value="2"/>
+                <Setter Property="BorderBrush" Value="Orange"/>
+                <Setter Property="BorderThickness" Value="0.5"/>
+            </Style.Setters>
+        </Style>
+        <!--Borders-->
+        <!--Texts-->
+        <Style x:Key="CcTextShared"
+               x:Shared="False"
+               TargetType="Control">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CcTextStyle1"
+               x:Shared="False"
+               TargetType="Control"
+               BasedOn="{StaticResource CcTextShared}">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CcTextStyle2"
+               x:Shared="False"
+               TargetType="Control"
+               BasedOn="{StaticResource CcTextShared}">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style.Setters>
+        </Style>
+        <!--Texts-->
+        <!--Templates-->
+        <ControlTemplate x:Key="CcFullName"
+                         TargetType="UserControl">
+            <Border Style="{StaticResource CcBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Children>
+                        <Label Grid.Column="0"
+                               Style="{StaticResource CcTextStyle1}"
+                               Content="{Binding Path=(vm:ContactSourceViewModel.Name), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Column="1"
+                               Style="{StaticResource CcTextStyle2}"
+                               Content="{Binding Path=(vm:ContactSourceViewModel.Surname), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid.Children>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="CcPhoneNumber"
+                         TargetType="UserControl">
+            <Border Style="{StaticResource CcBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Children>
+                        <Label Grid.Column="0"
+                               Style="{StaticResource CcTextStyle1}"
+                               Content="Phone"/>
+                        <Label Grid.Column="1"
+                               Style="{StaticResource CcTextStyle2}"
+                               Content="{Binding Path=(vm:ContactSourceViewModel.PhoneNumber), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid.Children>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <!--Templates-->
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="1.75*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Children>
+            <Image Grid.Column="0"
+                   Margin="10"
+                   MaxHeight="75"
+                   MaxWidth="100"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   Source="{Binding Path=(vm:ContactSourceViewModel.ImageSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="20"/>
+                    <RowDefinition Height="Auto" MinHeight="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.Children>
+                    <UserControl Grid.Row="0"
+                                 Template="{StaticResource CcFullName}"/>
+                    <UserControl Grid.Row="2"
+                                 Template="{StaticResource CcPhoneNumber}"/>
+                </Grid.Children>
+            </Grid>
+        </Grid.Children>
+    </Grid>
+</UserControl>

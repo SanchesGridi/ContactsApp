@@ -1,0 +1,281 @@
+﻿<Page x:Class="ContactsApp.UI.Views.Pages.TelegramAccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      mc:Ignorable="d" 
+      d:DesignHeight="165"
+      d:DesignWidth="460"
+      Title="Telegram Account Page"
+      DataContext="{Binding Path=TelegramAccountPageVm, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <!--Borders-->
+        <Style x:Key="TaP_B1"
+               x:Shared="False"
+               TargetType="Border">
+            <Style.Setters>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="TaP_B2"
+               x:Shared="False"
+               TargetType="Border">
+            <Style.Setters>
+                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+            </Style.Setters>
+        </Style>
+        <!--Borders-->
+        <!--Texts-->
+        <Style x:Key="TaP_Tblock"
+               x:Shared="False"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Firebrick"/>
+                <Setter Property="MinWidth" Value="200"/>
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Content="{Binding}"
+                                 Background="Black"
+                                 Foreground="GreenYellow"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"/>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="TaP_ToolBlock"
+               x:Shared="False"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="GreenYellow"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="TaP_Tbox"
+               x:Shared="False"
+               TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="MaxWidth" Value="200"/>
+                <Setter Property="MaxHeight" Value="25"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <!--Texts-->
+        <!--Buttons-->
+        <Style x:Key="TaP_Button"
+               x:Shared="False"
+               TargetType="Button">
+            <Style.Setters>
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="Background" Value="Firebrick"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="FontFamily" Value="Batang"/>
+                        <Setter Property="Foreground" Value="LimeGreen"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Buttons-->
+    </Page.Resources>
+    <Border Style="{StaticResource TaP_B1}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.Children>
+                <Border Grid.Column="0"
+                        Margin="2.5"
+                        Style="{StaticResource TaP_B2}">
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.35" Color="Black"/>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.Children>
+                            <Label Grid.Row="0"
+                                   Foreground="Firebrick"
+                                   HorizontalAlignment="Center"
+                                   Content="Accoutns"/>
+                            <ComboBox Grid.Row="1"
+                                      Name="AccountsBox"
+                                      Margin="0,2.5"
+                                      MinWidth="250"
+                                      HorizontalAlignment="Center"
+                                      HorizontalContentAlignment="Center"
+                                      DisplayMemberPath="DisplayUserName"
+                                      SelectedItem="{Binding SelectedAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding Path=ContactVm.TelegramAccounts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.Background>
+                                    <SolidColorBrush Opacity="0.35" Color="OrangeRed"/>
+                                </ComboBox.Background>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding AccountChangedCmd}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <TextBlock Grid.Row="2"
+                                       Visibility="{Binding BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource TaP_Tblock}"
+                                       Text="{Binding SelectedAccount.DisplayUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Opacity="0.05" Color="LightGray"/>
+                                </TextBlock.Background>
+                                <TextBlock.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="Display Name"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBox Grid.Row="2"
+                                     Name="DisplayData"
+                                     Visibility="{Binding EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TaP_Tbox}"
+                                     Text="{Binding SelectedAccount.DisplayUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TextChangedCmd}"
+                                                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <TextBox.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="Display Name"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <TextBlock Grid.Row="3"
+                                       Visibility="{Binding BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource TaP_Tblock}"
+                                       Text="{Binding SelectedAccount.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Opacity="0.05" Color="LightGray"/>
+                                </TextBlock.Background>
+                                <TextBlock.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="User Name"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBox Grid.Row="3"
+                                     Name="UserData"
+                                     Visibility="{Binding EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TaP_Tbox}"
+                                     Text="{Binding SelectedAccount.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TextChangedCmd}"
+                                                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <TextBox.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="User Name"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <TextBlock Grid.Row="4"
+                                       Visibility="{Binding BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Style="{StaticResource TaP_Tblock}"
+                                       Text="{Binding SelectedAccount.AccountIdentifierUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Opacity="0.05" Color="LightGray"/>
+                                </TextBlock.Background>
+                                <TextBlock.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="Account Identifier"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                            <TextBox Grid.Row="4"
+                                     Name="AccountIdentifierData"
+                                     Visibility="{Binding EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource TaP_Tbox}"
+                                     Text="{Binding SelectedAccount.AccountIdentifierUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TextChangedCmd}"
+                                                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <TextBox.ToolTip>
+                                    <ToolTip Background="Black">
+                                        <TextBlock Text="Account Identifier"
+                                                   Style="{StaticResource TaP_ToolBlock}"/>
+                                    </ToolTip>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                        </Grid.Children>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1"
+                        Margin="2.5"
+                        Style="{StaticResource TaP_B2}">
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.35" Color="Black"/>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.Children>
+                            <Button Grid.Row="0"
+                                    IsEnabled="{Binding SaveButtonAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Visibility="{Binding SaveButtonAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource TaP_Button}"
+                                    Content="Save"
+                                    Command="{Binding SaveAccountCmd}"/>
+                            <Button Grid.Row="1"
+                                    Style="{StaticResource TaP_Button}"
+                                    Content="Add"
+                                    Command="{Binding AddAccountCmd}"/>
+                            <Button Grid.Row="2"
+                                    Style="{StaticResource TaP_Button}"
+                                    Content="Edit"
+                                    Command="{Binding EditAccountCmd}"/>
+                            <Button Grid.Row="3"
+                                    Style="{StaticResource TaP_Button}"
+                                    Content="Delete"
+                                    Command="{Binding DeleteAccountCmd}"/>
+                        </Grid.Children>
+                    </Grid>
+                </Border>
+            </Grid.Children>
+        </Grid>
+    </Border>
+</Page>

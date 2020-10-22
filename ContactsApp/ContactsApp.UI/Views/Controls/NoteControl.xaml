@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="ContactsApp.UI.Views.Controls.NoteControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ContactsApp.UI.ViewModels"
+             mc:Ignorable="d"
+             Height="140"
+             Width="110"
+             Background="{StaticResource CommonNoteBrush}">
+    <UserControl.Resources>
+        <!--Brushes-->
+        <LinearGradientBrush x:Key="Nc_Tf" EndPoint="0,-0.1" StartPoint="0.35,0.9">
+            <GradientStop Color="OrangeRed" Offset="0.75"/>
+            <GradientStop Color="Orange" Offset="-0.015"/>
+        </LinearGradientBrush>
+        <!--Brushes-->
+        <!--Texts-->
+        <Style x:Key="Nc_Tb"
+               x:Shared="False"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <!--Texts-->
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource Nc_Tf}"
+                   Text="{Binding Path=(vm:NoteSourceViewModel.Title), UpdateSourceTrigger=PropertyChanged}"/>
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+            <TextBlock Grid.Row="1"
+                   FontSize="6.5"
+                   TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
+                   Text="{Binding Path=(vm:NoteSourceViewModel.Description), UpdateSourceTrigger=PropertyChanged}"/>
+        </ScrollViewer>
+        <TextBlock Grid.Row="2"
+                   Style="{StaticResource Nc_Tb}"
+                   Foreground="Green"
+                   Text="{Binding Path=(vm:NoteSourceViewModel.StartDate), UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="3"
+                   Style="{StaticResource Nc_Tb}"
+                   Foreground="Red"
+                   Text="{Binding Path=(vm:NoteSourceViewModel.EndDate), UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</UserControl>

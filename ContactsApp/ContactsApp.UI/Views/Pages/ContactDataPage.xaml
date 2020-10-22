@@ -1,0 +1,449 @@
+﻿<Page x:Class="ContactsApp.UI.Views.Pages.ContactDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="500"
+      Title="Contact Data Page"
+      Background="{Binding}"
+      DataContext="{Binding Path=ContactDataPageVm, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <!--Texts-->
+        <Style x:Key="CdP_Label"
+               x:Shared="False"
+               TargetType="Label">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Foreground" Value="OrangeRed"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+            </Style.Setters>
+        </Style>
+        <!--Labels-->
+        <Style x:Key="CdP_TextBlock"
+               x:Shared="False"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="13.5"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_TextBlockHeader1"
+               x:Shared="False"
+               BasedOn="{StaticResource CdP_TextBlock}"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="MinWidth" Value="185"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_TextBlockHeader2"
+               x:Shared="False"
+               BasedOn="{StaticResource CdP_TextBlock}"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="MinHeight" Value="20"/>
+                <Setter Property="Background" Value="OrangeRed"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_TextBox"
+               x:Shared="False"
+               TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="MaxHeight" Value="25"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="BorderThickness" Value="1.15"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_ImageToolTipTb"
+               x:Shared="False"
+               TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="GreenYellow"/>
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <!--Texts-->
+        <!--Images-->
+        <Style x:Key="CdP_Icon"
+               x:Shared="False"
+               TargetType="Image">
+            <Style.Setters>
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                <Setter Property="MaxHeight" Value="50"/>
+                <Setter Property="MaxWidth" Value="50"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_AccountIcon"
+               x:Shared="False"
+               TargetType="Image">
+            <Style.Setters>
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                <Setter Property="MaxHeight" Value="40"/>
+                <Setter Property="MaxWidth" Value="60"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_ImageDelete"
+               x:Shared="False"
+               TargetType="Image">
+            <Style.Setters>
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                <Setter Property="MaxHeight" Value="30"/>
+                <Setter Property="MinWidth" Value="60"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <!--Images-->
+        <!--Borders-->
+        <Style x:Key="CdP_BorderDelete"
+               x:Shared="False"
+               TargetType="Border">
+            <Style.Setters>
+                <Setter Property="Opacity" Value="0.55"/>
+                <Setter Property="MaxWidth" Value="60"/>
+                <Setter Property="MaxHeight" Value="30"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="Opacity" Value="1"/>
+                        <Setter Property="Background" Value="Red"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CdP_AccountBorder"
+               x:Shared="False"
+               TargetType="Border">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2.5"/>
+                <Setter Property="Opacity" Value="0.25"/>
+                <Setter Property="MinHeight" Value="40"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="Opacity" Value="0.9"/>
+                        <Setter Property="Background" Value="LimeGreen"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Borders-->
+        <!--Buttons-->
+        <Style x:Key="CdP_ButtonDelete"
+               x:Shared="False"
+               TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border Style="{StaticResource CdP_BorderDelete}">
+                                <Image Style="{StaticResource CdP_ImageDelete}"
+                                       Source="{Binding Path=ContactVm.DeleteButtonSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="CdP_StdButton"
+               x:Shared="False"
+               TargetType="Button">
+            <Style.Setters>
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="MinHeight" Value="25"/>
+                <Setter Property="Background" Value="Firebrick"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="BorderBrush" Value="OrangeRed"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="FontFamily" Value="Batang"/>
+                        <Setter Property="Foreground" Value="LimeGreen"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Buttons-->
+        <!--Frames-->
+        <Style x:Key="CdP_AccountsFrame"
+               x:Shared="False"
+               TargetType="Frame">
+            <Style.Setters>
+                <Setter Property="Margin" Value="2.5,5,2.5,2.5"/>
+                <Setter Property="NavigationUIVisibility" Value="Hidden"/>
+                <Setter Property="JournalOwnership" Value="OwnsJournal"/>
+            </Style.Setters>
+        </Style>
+        <!--Frames-->
+    </Page.Resources>
+    <Grid Background="{Binding}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2.05*"/>
+        </Grid.RowDefinitions>
+        <Grid.Children>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.55*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Children>
+                    <Image Grid.Column="0"
+                           Margin="7.5"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Source="{Binding Path=ContactVm.ImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction IsEnabled="{Binding EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                       Command="{Binding LoadImageCmd}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image.ToolTip>
+                            <ToolTip Background="Black"
+                                     Visibility="{Binding EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock Text="Click to upload new image!"
+                                           Style="{StaticResource CdP_ImageToolTipTb}"/>
+                            </ToolTip>
+                        </Image.ToolTip>
+                    </Image>
+                    <Grid Grid.Column="1"
+                          Margin="7.5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.75*"/>
+                            <RowDefinition Height="0.75*"/>
+                            <RowDefinition Height="0.75*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.Children>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.55*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource CdP_Label}"
+                                       Content="Name:"/>
+                                <TextBlock Grid.Column="1"
+                                           Visibility="{Binding Path=BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource CdP_TextBlockHeader1}"
+                                           Text="{Binding Path=ContactVm.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Grid.Column="1"
+                                         Name="NameData"
+                                         Visibility="{Binding Path=EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Path=EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource CdP_TextBox}"
+                                         Text="{Binding Path=ContactVm.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DataChangedCmd}"
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.55*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource CdP_Label}"
+                                       Content="Surname:"/>
+                                <TextBlock Grid.Column="1"
+                                           Visibility="{Binding Path=BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource CdP_TextBlockHeader1}"
+                                           Text="{Binding Path=ContactVm.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Grid.Column="1"
+                                         Name="SurnameData"
+                                         Visibility="{Binding Path=EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Path=EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource CdP_TextBox}"
+                                         Text="{Binding Path=ContactVm.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DataChangedCmd}"
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.55*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0"
+                                       Style="{StaticResource CdP_Icon}"
+                                       Source="{Binding Path=ContactVm.PhoneSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Column="1"
+                                           Visibility="{Binding Path=BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource CdP_TextBlockHeader1}"
+                                           Text="{Binding Path=ContactVm.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Grid.Column="1"
+                                         Name="PhoneData"
+                                         Visibility="{Binding Path=EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Path=EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource CdP_TextBox}"
+                                         Text="{Binding Path=ContactVm.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DataChangedCmd}"
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid>
+                        </Grid.Children>
+                    </Grid>
+                </Grid.Children>
+            </Grid>
+            <Border Grid.Row="1">
+                <Grid Margin="7.5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" MinHeight="40"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto" MinHeight="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Children>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.25*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Children>
+                                <Image Grid.Column="0"
+                                       Style="{StaticResource CdP_Icon}"
+                                       Source="{Binding Path=ContactVm.EmailSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Column="1"
+                                           Visibility="{Binding Path=BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Style="{StaticResource CdP_TextBlockHeader2}"
+                                           Text="{Binding Path=ContactVm.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Grid.Column="1"
+                                         Name="EmailData"
+                                         Visibility="{Binding Path=EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         IsEnabled="{Binding Path=EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource CdP_TextBox}"
+                                         Text="{Binding Path=ContactVm.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding DataChangedCmd}"
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Name}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+                            </Grid.Children>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.Children>
+                                <Frame Grid.Row="0"
+                                       Name="AccountsFrame"
+                                       MaxHeight="165"
+                                       Style="{StaticResource CdP_AccountsFrame}"/>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Children>
+                                        <Border Grid.Column="0"
+                                                Name="Telegram"
+                                                Style="{StaticResource CdP_AccountBorder}">
+                                            <Image Style="{StaticResource CdP_AccountIcon}"
+                                                   Source="{Binding ContactVm.TelegramAccountSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <i:InvokeCommandAction Command="{Binding NavigateToAccountCmd}"
+                                                                           CommandParameter="{Binding Path=Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                        <Border Grid.Column="1"
+                                                Name="Signal"
+                                                Style="{StaticResource CdP_AccountBorder}">
+                                            <Image Style="{StaticResource CdP_AccountIcon}"
+                                                   Source="{Binding ContactVm.SignalAccountSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <i:InvokeCommandAction Command="{Binding NavigateToAccountCmd}"
+                                                                           CommandParameter="{Binding Path=Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                        <Border Grid.Column="2"
+                                                Name="Wire"
+                                                Style="{StaticResource CdP_AccountBorder}">
+                                            <Image Style="{StaticResource CdP_AccountIcon}"
+                                                   Source="{Binding ContactVm.WireAccountSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                    <i:InvokeCommandAction Command="{Binding NavigateToAccountCmd}"
+                                                                           CommandParameter="{Binding Path=Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                    </Grid.Children>
+                                </Grid>
+                            </Grid.Children>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Children>
+                                <Button Grid.Column="0"
+                                        Content="Edit"
+                                        Visibility="{Binding Path=BrowsingAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Path=BrowsingAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Style="{StaticResource CdP_StdButton}"
+                                        Command="{Binding EditContactCmd}"/>
+                                <Button Grid.Column="0"
+                                        Content="Save"
+                                        Visibility="{Binding Path=EditAccess.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        IsEnabled="{Binding Path=EditAccess.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Style="{StaticResource CdP_StdButton}"
+                                        Command="{Binding SaveContactCmd}"/>
+                                <Button Grid.Column="2"
+                                        Style="{StaticResource CdP_ButtonDelete}"
+                                        Command="{Binding DeleteContactCmd}"/>
+                            </Grid.Children>
+                        </Grid>
+                    </Grid.Children>
+                </Grid>
+            </Border>
+        </Grid.Children>
+    </Grid>
+</Page>

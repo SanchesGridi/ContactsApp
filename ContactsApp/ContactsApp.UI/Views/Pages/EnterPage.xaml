@@ -1,0 +1,232 @@
+﻿<Page x:Class="ContactsApp.UI.Views.Pages.EnterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:b="clr-namespace:ContactsApp.UI.Helpers.Behaviors"
+      mc:Ignorable="d" 
+      WindowHeight="450"
+      d:DesignHeight="450" 
+      WindowWidth="800"
+      d:DesignWidth="800"
+      WindowTitle="Welcome To Contacts App! "
+      Title="Enter Page"
+      Background="Black"
+      DataContext="{Binding Path=EnterPageVm, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <!--Grids-->
+        <!--Buttons-->
+        <Style x:Key="StdButton"
+               x:Shared="False"
+               TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="2.5"/>
+                <Setter Property="BorderThickness" Value="2.5"/>
+                <Setter Property="BorderBrush" Value="Firebrick"/>
+                <Setter Property="Foreground" Value="Firebrick"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="FontFamily" Value="Batang"/>
+                        <Setter Property="Foreground" Value="LimeGreen"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="EpButton"
+               x:Shared="False"
+               BasedOn="{StaticResource StdButton}"
+               TargetType="Button">
+            <Style.Setters>
+                <Setter Property="MinHeight" Value="25"/>
+                <Setter Property="MaxWidth" Value="100"/>
+            </Style.Setters>
+        </Style>
+        <!--Buttons-->
+        <!--Labels-->
+        <Style x:Key="PaGuestLabel"
+               x:Shared="False"
+               TargetType="Label">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="Lime"/>
+                <Setter Property="Margin" Value="2.5"/>
+                <Setter Property="MinHeight" Value="20"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <!--Labels-->
+        <!--Texts-->
+        <Style x:Key="EpTextControl"
+               x:Shared="False"
+               TargetType="Control">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderBrush" Value="LimeGreen"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="Foreground" Value="Firebrick"/>
+                <Setter Property="MinHeight" Value="20"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="EpGuestPb"
+               x:Shared="False"
+               BasedOn="{StaticResource EpTextControl}"
+               TargetType="PasswordBox">
+            <Style.Setters>
+                <Setter Property="PasswordChar" Value="*"/>
+            </Style.Setters>
+        </Style>
+        <!--Texts-->
+        <!--ProgressBars-->
+        <Style x:Key="EpProgress"
+               x:Shared="False"
+               TargetType="ProgressBar">
+            <Style.Setters>
+                <Setter Property="Margin" Value="10, 5"/>
+                <Setter Property="MinHeight" Value="10"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Firebrick"/>
+                <Setter Property="Background" Value="LimeGreen"/>
+                <Setter Property="IsIndeterminate" Value="True"/>
+            </Style.Setters>
+        </Style>
+        <!--ProgressBars-->
+    </Page.Resources>
+    <Grid Style="{StaticResource GridMargin5}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Children>
+            <Label Grid.Row="0"
+                   Style="{StaticResource LabelTitle}"
+                   Content="Enter Page"/>
+            <Grid Grid.Row="1"
+                  Style="{StaticResource GridMargin5}"
+                  IsEnabled="{Binding UserAccessModel.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="{Binding UserAccessModel.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Children>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource EpButton}"
+                            Command="{Binding SignInCmd}"
+                            Content="Sign in"/>
+                    <Button Grid.Column="2"
+                            Style="{StaticResource EpButton}"
+                            Command="{Binding SignUpCmd}"
+                            Content="Sign up"/>
+                </Grid.Children>
+            </Grid>
+            <Grid Grid.Row="2"
+                  Style="{StaticResource GridMargin5}"
+                  IsEnabled="{Binding UserAccessModel.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="{Binding UserAccessModel.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Children>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource EpButton}"
+                            Command="{Binding EnterAsGuestCmd}"
+                            Content="Enter As Guest"/>
+                </Grid.Children>
+            </Grid>
+            <Grid Grid.Row="3"
+                  Style="{StaticResource GridMargin5}"
+                  IsEnabled="{Binding GuestAccessModel.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="{Binding GuestAccessModel.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Children>
+                    <Grid Grid.Column="1"
+                          Style="{StaticResource GridMargin5}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.Children>
+                            <Grid Grid.Row="0"
+                                  Style="{StaticResource GridMargin5}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.Children>
+                                    <Label Grid.Column="0"
+                                           Style="{StaticResource PaGuestLabel}"
+                                           Content="Email"/>
+                                    <TextBox Grid.Column="1"
+                                             Style="{StaticResource EpTextControl}"
+                                             Text="{Binding GuestModel.Email, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringConverter}}"/>
+                                </Grid.Children>
+                            </Grid>
+                            <Grid Grid.Row="1"
+                                  Style="{StaticResource GridMargin5}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.Children>
+                                    <Label Grid.Column="0"
+                                           Style="{StaticResource PaGuestLabel}"
+                                           Content="Password"/>
+                                    <PasswordBox Grid.Column="1"
+                                                 Style="{StaticResource EpGuestPb}">
+                                        <i:Interaction.Behaviors>
+                                            <b:PasswordProviderBehavior Password="{Binding GuestModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </i:Interaction.Behaviors>
+                                    </PasswordBox>
+                                </Grid.Children>
+                            </Grid>
+                            <ProgressBar Grid.Row="2"
+                                         Style="{StaticResource EpProgress}"
+                                         IsEnabled="{Binding Path=ProgressAccessModel.SwitcherAceess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Visibility="{Binding Path=ProgressAccessModel.VisibilityAccess, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.Children>
+                                    <Button Grid.Column="0"
+                                            Style="{StaticResource EpButton}"
+                                            Command="{Binding SignUpAsGuestCmd}"
+                                            IsEnabled="{Binding Path=GuestButtonSwitcher.Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Content="Sign up"/>
+                                    <Button Grid.Column="1"
+                                            Style="{StaticResource EpButton}"
+                                            Command="{Binding CancelSignUpAsGuestCmd}"
+                                            Content="Cancel"/>
+                                </Grid.Children>
+                            </Grid>
+
+                        </Grid.Children>
+                    </Grid>
+                </Grid.Children>
+            </Grid>
+        </Grid.Children>
+    </Grid>
+</Page>
